@@ -1,0 +1,26 @@
+<!doctype html><html lang="de"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Digitallagune – Amazon PPC Report</title>
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="authbar">
+  <div class="authbar-in">
+    <span class="authbar-who" id="authbar-who"></span>
+    <span class="authbar-spacer"></span>
+    <a class="link-btn" id="admin-link" href="admin.html" style="display:none">Admin</a>
+    <button class="link-btn" id="logout-btn">Abmelden</button>
+  </div>
+</div>
+
+<div class="wrap" id="loading-wrap"><p style="padding:60px 0;color:var(--muted);text-align:center">Lade Report…</p></div>
+<div class="wrap" id="error-wrap" style="display:none"><div class="landing-error show" id="dashboard-error"></div></div>
+<div id="reports-root"></div>
+
+<script src="js/report-builder.js"></script>
+<script type="module" src="js/dashboard.js"></script>
+</body></html>

@@ -1,0 +1,53 @@
+<!doctype html><html lang="de"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Digitallagune – Admin</title>
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="authbar">
+  <div class="authbar-in">
+    <span class="authbar-who" id="authbar-who"></span>
+    <span class="authbar-spacer"></span>
+    <button class="link-btn" id="logout-btn">Abmelden</button>
+  </div>
+</div>
+
+<div class="landing" style="min-height:auto;padding:50px 20px;">
+  <div class="landing-in">
+    <img class="landing-logo" src="assets/logo.jpg" alt="Digitallagune">
+    <h1>Admin</h1>
+    <p class="lead">Lade den monatlichen Daten-Export hoch. Kunden werden automatisch angelegt und aktualisiert.</p>
+
+    <div class="dropgrid">
+      <div class="dropzone" id="dz-data">
+        <div class="dz-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M8 16v-4M12 16V8M16 16v-6.5"/></svg></div>
+        <div class="dz-title">Daten-Export</div>
+        <div class="dz-sub">.xlsx mit Entity / Month / Impressions / Spend / Revenue …</div>
+        <div class="dz-file" id="dz-data-file"></div>
+        <input type="file" id="file-data" accept=".xlsx,.xls">
+      </div>
+    </div>
+
+    <button class="gen-btn" id="upload-btn" disabled>Hochladen</button>
+    <div class="landing-error" id="upload-error"></div>
+    <div id="upload-result"></div>
+
+    <div style="margin-top:34px;">
+      <button class="pill-btn" id="sync-btn">To-dos jetzt synchronisieren</button>
+      <div class="landing-error" id="sync-error" style="max-width:520px;margin:16px auto 0"></div>
+      <div class="landing-success" id="sync-success" style="max-width:520px;margin:16px auto 0"></div>
+    </div>
+
+    <div class="wrap" style="margin-top:40px;text-align:left;">
+      <div class="sec-h">Kunden</div>
+      <ul class="client-list" id="client-list"></ul>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/admin.js"></script>
+</body></html>
