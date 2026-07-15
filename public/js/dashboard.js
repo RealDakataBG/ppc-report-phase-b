@@ -40,11 +40,12 @@ function dbDateToMonthLabel(dateStr) {
   return EN_MONTHS[m] + ' ' + y;
 }
 
-function loadSidebarClients() {
+function loadSidebarClients(activeClientId) {
   return supabase.from('clients').select('id, name').order('name').then(function (res) {
     if (res.error) return;
     document.getElementById('sidebar-clients').innerHTML = res.data.map(function (c) {
-      return '<a class="client-pill" href="dashboard.html?client=' + encodeURIComponent(c.id) + '">' + esc(c.name) + '</a>';
+      var cls = 'client-pill' + (c.id === activeClientId ? ' active' : '');
+      return '<a class="' + cls + '" href="dashboard.html?client=' + encodeURIComponent(c.id) + '">' + esc(c.name) + '</a>';
     }).join('');
   });
 }
@@ -60,11 +61,6 @@ async function main() {
   if (!profile) return; // requireSession already redirected to /
 
   document.getElementById('authbar-who').innerHTML = 'Angemeldet als <strong>' + esc(profile.email || '') + '</strong>';
-  if (profile.role === 'admin') {
-    document.body.classList.add('admin-page');
-    document.getElementById('sidebar').style.display = '';
-    loadSidebarClients();
-  }
 
   var clientId = profile.client_id;
   var params = new URLSearchParams(window.location.search);
@@ -75,6 +71,12 @@ async function main() {
     // tampering with this same query param just gets an empty result, never
     // another client's data.
     clientId = overrideClientId;
+  }
+
+  if (profile.role === 'admin') {
+    document.body.classList.add('admin-page');
+    document.getElementById('sidebar').style.display = '';
+    loadSidebarClients(clientId);
   }
 
   if (!clientId) {

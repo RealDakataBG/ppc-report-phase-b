@@ -113,6 +113,8 @@ display:block;box-sizing:border-box;text-decoration:none;}
 .side-btn-primary:hover{background:#0f8a44;}
 .side-btn-secondary{background:var(--soft);color:var(--ink2);border-color:var(--line);}
 .side-btn-secondary:hover{background:#E4E9EE;}
+.side-btn-accent{background:var(--brand);color:#fff;}
+.side-btn-accent:hover{background:#0C6969;}
 .sidebar-label{flex-shrink:0;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
 text-transform:uppercase;color:var(--muted);padding:14px 16px 8px;}
 .sidebar-clients{flex:1;min-height:0;overflow-y:auto;padding:0 16px 18px;display:flex;flex-direction:column;gap:8px;}
@@ -121,6 +123,7 @@ border-radius:999px;border:1px solid var(--line);background:var(--card);color:va
 display:block;width:100%;box-sizing:border-box;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 transition:all .16s;flex-shrink:0;}
 .client-pill:hover{border-color:var(--brand);color:var(--brand);}
+.client-pill.active{border-color:var(--brand);background:rgba(14,124,123,.10);color:var(--brand);font-weight:600;}
 
 /* header */
 header.hd{position:relative;color:#fff;overflow:hidden;
