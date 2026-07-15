@@ -411,7 +411,9 @@ function buildCompanyReport(companyName, entry, todos) {
   html += '<section><div class="sec-h">Analyse & Bewertung</div>' + buildAnalysis(months) + '</section>';
 
   /* ---- plan (from todos) ---- */
-  html += '<section><div class="sec-h">To-do & Plan</div>' + buildPlan(companyName, todos) + '</section>';
+  if (todos !== null) {
+    html += '<section><div class="sec-h">To-do & Plan</div>' + buildPlan(companyName, todos) + '</section>';
+  }
 
   /* ---- footer ---- */
   var today = new Date();

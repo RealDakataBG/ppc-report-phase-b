@@ -107,7 +107,8 @@ body.admin-page .admin-main{margin-left:240px;}
 .sidebar-actions{flex-shrink:0;padding:18px 16px 10px;display:flex;flex-direction:column;gap:9px;
 border-bottom:1px solid var(--line);}
 .side-btn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.02em;padding:10px 16px;
-border-radius:999px;border:1px solid transparent;cursor:pointer;transition:all .16s;width:100%;text-align:center;}
+border-radius:999px;border:1px solid transparent;cursor:pointer;transition:all .16s;width:100%;text-align:center;
+display:block;box-sizing:border-box;text-decoration:none;}
 .side-btn-primary{background:var(--brand2);color:#fff;}
 .side-btn-primary:hover{background:#0f8a44;}
 .side-btn-secondary{background:var(--soft);color:var(--ink2);border-color:var(--line);}

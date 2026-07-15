@@ -137,6 +137,52 @@ function loadClients() {
   });
 }
 
+/* ---------- combined performance overview (all clients) ---------- */
+function pad2(n) { return String(n).padStart(2, '0'); }
+function currentMonthCutoff() {
+  var now = new Date();
+  return now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-01';
+}
+function dbDateToMonthLabel(dateStr) {
+  var parts = dateStr.split('-');
+  return EN_MONTHS[Number(parts[1]) - 1] + ' ' + Number(parts[0]);
+}
+
+// Groups performance_monthly rows from every client by month, sums the raw
+// counters, then re-derives the ratio metrics per month - same formulas as
+// report-builder.js's own total-fallback, just applied across clients
+// instead of across one client's months.
+function aggregateMonthly(rows) {
+  var byMonth = {};
+  rows.forEach(function (r) {
+    var g = byMonth[r.month] || (byMonth[r.month] = { month: r.month, impressions: 0, clicks: 0, orders: 0, spend: 0, revenue: 0 });
+    g.impressions += r.impressions; g.clicks += r.clicks; g.orders += r.orders; g.spend += r.spend; g.revenue += r.revenue;
+  });
+  return Object.keys(byMonth).sort().map(function (key) {
+    var g = byMonth[key];
+    g.ctr = g.impressions ? g.clicks / g.impressions : 0;
+    g.cr = g.clicks ? g.orders / g.clicks : 0;
+    g.acos = g.revenue ? g.spend / g.revenue : 0;
+    g.roas = g.spend ? g.revenue / g.spend : 0;
+    g.tacos = g.acos;
+    g.cpc = g.clicks ? g.spend / g.clicks : 0;
+    g.cpo = g.orders ? g.spend / g.orders : 0;
+    g.asp = g.orders ? g.revenue / g.orders : 0;
+    g.month = dbDateToMonthLabel(g.month);
+    return g;
+  });
+}
+
+function loadOverview() {
+  return supabase.from('performance_monthly').select('*')
+    .lt('month', currentMonthCutoff()).order('month', { ascending: true })
+    .then(function (res) {
+      if (res.error) return;
+      var months = aggregateMonthly(res.data);
+      document.getElementById('overview-root').innerHTML = buildCompanyReport('Alle Kunden', { total: null, months: months }, null);
+    });
+}
+
 /* ---------- invite modal ---------- */
 var inviteBackdrop = document.getElementById('invite-backdrop');
 var inviteEmailInput = document.getElementById('invite-email');
@@ -248,4 +294,5 @@ requireAdminSession().then(function (profile) {
   if (!profile) return;
   document.getElementById('authbar-who').innerHTML = 'Angemeldet als <strong>' + esc(profile.email || '') + '</strong> (Admin)';
   loadClients();
+  loadOverview();
 }).catch(function (err) { console.error(err); });

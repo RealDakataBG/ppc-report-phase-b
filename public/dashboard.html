@@ -8,18 +8,25 @@
 </head>
 <body>
 
+<aside class="sidebar" id="sidebar" style="display:none">
+  <div class="sidebar-actions">
+    <a class="side-btn side-btn-secondary" href="admin.html">Übersicht</a>
+  </div>
+  <div class="sidebar-label">Kunden</div>
+  <div class="sidebar-clients" id="sidebar-clients"></div>
+</aside>
+
 <div class="authbar">
   <div class="authbar-in">
     <span class="authbar-who" id="authbar-who"></span>
     <span class="authbar-spacer"></span>
-    <a class="link-btn" id="admin-link" href="admin.html" style="display:none">Admin</a>
     <button class="link-btn" id="logout-btn">Abmelden</button>
   </div>
 </div>
 
-<div class="wrap" id="loading-wrap"><p style="padding:60px 0;color:var(--muted);text-align:center">Lade Report…</p></div>
-<div class="wrap" id="error-wrap" style="display:none"><div class="landing-error show" id="dashboard-error"></div></div>
-<div id="reports-root"></div>
+<div class="wrap admin-main" id="loading-wrap"><p style="padding:60px 0;color:var(--muted);text-align:center">Lade Report…</p></div>
+<div class="wrap admin-main" id="error-wrap" style="display:none"><div class="landing-error show" id="dashboard-error"></div></div>
+<div id="reports-root" class="admin-main"></div>
 
 <script src="js/report-builder.js"></script>
 <script type="module" src="js/dashboard.js"></script>
