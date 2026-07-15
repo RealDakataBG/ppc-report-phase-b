@@ -6,7 +6,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="admin-page">
+
+<aside class="sidebar">
+  <div class="sidebar-actions">
+    <button class="side-btn side-btn-primary" id="invite-open-btn" type="button">+ Neuer Kunde</button>
+    <button class="side-btn side-btn-secondary" id="sync-btn" type="button">To-dos jetzt synchronisieren</button>
+  </div>
+  <div class="sidebar-label">Kunden</div>
+  <div class="sidebar-clients" id="sidebar-clients"></div>
+</aside>
 
 <div class="authbar">
   <div class="authbar-in">
@@ -16,8 +25,11 @@
   </div>
 </div>
 
-<div class="landing" style="min-height:auto;padding:50px 20px;">
+<div class="landing admin-main" style="min-height:auto;padding:50px 20px;">
   <div class="landing-in">
+    <div class="landing-error" id="sync-error"></div>
+    <div class="landing-success" id="sync-success"></div>
+
     <img class="landing-logo" src="assets/logo.jpg" alt="Digitallagune">
     <h1>Admin</h1>
     <p class="lead">Lade den monatlichen Daten-Export hoch. Kunden werden automatisch angelegt und aktualisiert.</p>
@@ -35,17 +47,28 @@
     <button class="gen-btn" id="upload-btn" disabled>Hochladen</button>
     <div class="landing-error" id="upload-error"></div>
     <div id="upload-result"></div>
+  </div>
+</div>
 
-    <div style="margin-top:34px;">
-      <button class="pill-btn" id="sync-btn">To-dos jetzt synchronisieren</button>
-      <div class="landing-error" id="sync-error" style="max-width:520px;margin:16px auto 0"></div>
-      <div class="landing-success" id="sync-success" style="max-width:520px;margin:16px auto 0"></div>
-    </div>
-
-    <div class="wrap" style="margin-top:40px;text-align:left;">
-      <div class="sec-h">Kunden</div>
-      <ul class="client-list" id="client-list"></ul>
-    </div>
+<div class="modal-backdrop" id="invite-backdrop">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="invite-modal-title">
+    <button class="modal-close" id="invite-close" type="button" aria-label="Schließen">&times;</button>
+    <h2 class="modal-title" id="invite-modal-title">Neuer Kunde</h2>
+    <p class="modal-sub">E-Mail einladen und mit einer Firma verknüpfen.</p>
+    <form id="invite-form">
+      <div class="field">
+        <label for="invite-email">E-Mail-Adresse</label>
+        <input type="email" id="invite-email" autocomplete="off" required placeholder="name@firma.de">
+      </div>
+      <div class="field combobox" id="invite-company-combobox">
+        <label for="invite-company">Firma</label>
+        <input type="text" id="invite-company" autocomplete="off" required placeholder="Firmenname suchen oder neu anlegen">
+        <ul class="combobox-list" id="invite-company-list"></ul>
+      </div>
+      <button class="gen-btn" id="invite-submit" type="submit">Einladen</button>
+    </form>
+    <div class="landing-error" id="invite-error"></div>
+    <div class="landing-success" id="invite-success"></div>
   </div>
 </div>
 
