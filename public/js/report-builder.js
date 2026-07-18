@@ -284,6 +284,16 @@ function buildAnalysis(months) {
   return html;
 }
 
+// A sheet cell can hold several "- " prefixed lines for one (client, month);
+// split them back into individual bullet rows instead of the raw \n text,
+// which browsers collapse to a single line.
+function taskLines(task) {
+  return String(task || '')
+    .split(/\r?\n/)
+    .map(function (line) { return line.replace(/^\s*[-•]\s*/, '').trim(); })
+    .filter(function (line) { return line.length > 0; });
+}
+
 function buildPlan(companyName, todos) {
   var html = '<div class="plan"><div class="plan-hero">';
   html += '<div class="plan-season-badge"><span class="ico">✓</span>Automatisch abgeglichene To-dos</div>';
@@ -296,9 +306,11 @@ function buildPlan(companyName, todos) {
     html += '<div class="plan-next-badge">▶ ' + todos.length + ' Maßnahme' + (todos.length > 1 ? 'n' : '') + '</div>';
     html += '<ul class="plan-actions">';
     todos.forEach(function (t, idx) {
+      var lines = taskLines(t.task);
+      if (lines.length === 0) lines = ['(kein Titel)'];
       html += '<li><div class="plan-num">' + (idx + 1) + '</div><span>' +
         '<span class="plan-meta">' + esc(deMonthFromEnglish(t.month)) + '</span>' +
-        esc(t.task || '(kein Titel)') +
+        '<ul class="plan-bullets">' + lines.map(function (line) { return '<li>' + esc(line) + '</li>'; }).join('') + '</ul>' +
         '</span></li>';
     });
     html += '</ul>';

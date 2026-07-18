@@ -269,4 +269,6 @@ letter-spacing:.08em;color:var(--brand);}
 color:#fff;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
 display:flex;align-items:center;justify-content:center;margin-top:1px;}
 .plan-meta{display:block;margin-top:4px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);}
+.plan-actions .plan-bullets{list-style:disc;padding-left:18px;margin-top:6px;display:flex;flex-direction:column;gap:5px;}
+.plan-actions .plan-bullets li{display:list-item;gap:0;padding:0;border-bottom:none;font-size:14.5px;}
 .plan-empty{color:var(--muted);font-size:14px;padding:6px 0;}
