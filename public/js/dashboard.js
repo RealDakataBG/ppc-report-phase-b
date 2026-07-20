@@ -40,6 +40,24 @@ function dbDateToMonthLabel(dateStr) {
   return EN_MONTHS[m] + ' ' + y;
 }
 
+/* ---------- collapsible sidebar (admin only) ---------- */
+var SIDEBAR_COLLAPSED_KEY = 'admin-sidebar-collapsed';
+function initSidebarToggle() {
+  var btn = document.getElementById('sidebar-toggle');
+  btn.style.display = '';
+  function apply(collapsed) {
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+    btn.textContent = collapsed ? '›' : '‹';
+    btn.setAttribute('aria-expanded', String(!collapsed));
+  }
+  apply(localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === '1');
+  btn.addEventListener('click', function () {
+    var collapsed = !document.body.classList.contains('sidebar-collapsed');
+    apply(collapsed);
+    localStorage.setItem(SIDEBAR_COLLAPSED_KEY, collapsed ? '1' : '0');
+  });
+}
+
 function loadSidebarClients(activeClientId) {
   return supabase.from('clients').select('id, name').order('name').then(function (res) {
     if (res.error) return;
@@ -77,6 +95,7 @@ async function main() {
     document.body.classList.add('admin-page');
     document.getElementById('sidebar').style.display = '';
     loadSidebarClients(clientId);
+    initSidebarToggle();
   }
 
   if (!clientId) {

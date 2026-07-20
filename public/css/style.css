@@ -46,7 +46,7 @@ border-radius:10px;padding:10px 14px;display:none;}
 .landing-success.show{display:block;}
 
 .info-banner{margin-top:24px;font-size:13px;line-height:1.5;color:var(--ink2);background:rgba(14,124,123,.07);
-border:1px solid rgba(14,124,123,.22);border-radius:10px;padding:12px 16px;}
+border:1px solid rgba(14,124,123,.22);border-radius:10px;padding:12px 16px;text-align:center;}
 
 /* simple form controls (login email field, etc.) */
 .field{text-align:left;margin-bottom:14px;}
