@@ -139,10 +139,10 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%);}
 body.sidebar-collapsed.admin-page .authbar{margin-left:0;}
 body.sidebar-collapsed.admin-page .admin-main{margin-left:0;}
 .sidebar-toggle{position:fixed;top:50%;left:240px;transform:translateY(-50%);z-index:30;
-width:16px;height:60px;border:none;border-radius:0 10px 10px 0;background:var(--ink2);color:#fff;
+width:16px;height:60px;border:none;border-radius:0 10px 10px 0;background:var(--brand);color:#fff;
 display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--sh-sm);
 transition:left .22s ease,background .16s ease;font-size:12px;line-height:1;padding:0;}
-.sidebar-toggle:hover{background:var(--brand);}
+.sidebar-toggle:hover{background:#0C6969;}
 body.sidebar-collapsed .sidebar-toggle{left:0;}
 
 /* header */
