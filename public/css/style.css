@@ -130,6 +130,18 @@ transition:all .16s;flex-shrink:0;}
 .client-pill:hover{border-color:var(--brand);color:var(--brand);}
 .client-pill.active{border-color:var(--brand);background:rgba(14,124,123,.10);color:var(--brand);font-weight:600;}
 
+/* ===== Sidebar collapse ===== */
+.sidebar{transition:transform .22s ease;}
+body.sidebar-collapsed .sidebar{transform:translateX(-100%);}
+body.sidebar-collapsed.admin-page .authbar{margin-left:0;}
+body.sidebar-collapsed.admin-page .admin-main{margin-left:0;}
+.sidebar-toggle{position:fixed;top:18px;left:240px;z-index:30;width:28px;height:28px;border-radius:50%;
+border:1px solid var(--line);background:var(--card);color:var(--ink2);display:flex;align-items:center;
+justify-content:center;cursor:pointer;box-shadow:var(--sh-sm);transition:left .22s ease;font-size:13px;
+line-height:1;padding:0;}
+.sidebar-toggle:hover{border-color:var(--brand);color:var(--brand);}
+body.sidebar-collapsed .sidebar-toggle{left:12px;}
+
 /* header */
 header.hd{position:relative;color:#fff;overflow:hidden;
 background:radial-gradient(1200px 380px at 78% -10%,rgba(18,161,80,.28),transparent 60%),
@@ -219,7 +231,8 @@ display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 .badge{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;padding:3px 9px;border-radius:999px;}
 @media(max-width:680px){.hegrid{grid-template-columns:repeat(2,1fr)!important;}
 .kgrid{grid-template-columns:repeat(2,1fr);}.hd-in{padding-bottom:62px;}.hero{padding:22px 18px 18px;}
-.sidebar{width:190px;} body.admin-page .authbar{margin-left:190px;} body.admin-page .admin-main{margin-left:190px;}}
+.sidebar{width:190px;} body.admin-page .authbar{margin-left:190px;} body.admin-page .admin-main{margin-left:190px;}
+.sidebar-toggle{left:190px;}}
 @media print{body{background:#fff}.hero,.card,.kpi,.analysis{box-shadow:none}.authbar{display:none!important;}
 .sidebar{display:none!important;} body.admin-page .authbar,body.admin-page .admin-main{margin-left:0!important;}
 header.hd,.hero::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}}

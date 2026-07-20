@@ -7,6 +7,21 @@ var allClients = []; // {id, name}[] - shared source for the sidebar list and th
 
 document.getElementById('logout-btn').addEventListener('click', function () { signOut(); });
 
+/* ---------- collapsible sidebar ---------- */
+var SIDEBAR_COLLAPSED_KEY = 'admin-sidebar-collapsed';
+var sidebarToggleBtn = document.getElementById('sidebar-toggle');
+function applySidebarCollapsed(collapsed) {
+  document.body.classList.toggle('sidebar-collapsed', collapsed);
+  sidebarToggleBtn.textContent = collapsed ? '›' : '‹';
+  sidebarToggleBtn.setAttribute('aria-expanded', String(!collapsed));
+}
+applySidebarCollapsed(localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === '1');
+sidebarToggleBtn.addEventListener('click', function () {
+  var collapsed = !document.body.classList.contains('sidebar-collapsed');
+  applySidebarCollapsed(collapsed);
+  localStorage.setItem(SIDEBAR_COLLAPSED_KEY, collapsed ? '1' : '0');
+});
+
 function showEl(el, msg) { el.textContent = msg; el.classList.add('show'); }
 function hideEl(el) { el.classList.remove('show'); el.textContent = ''; }
 
